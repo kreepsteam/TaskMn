@@ -1,12 +1,19 @@
 ﻿<Window x:Class="TaskMn.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TaskMn"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Task Manager" Height="400" Width="600">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <TextBox x:Name="TagNameTextBox" Width="150" Margin="0,0,10,0"/>
+            <Button Content="Добавить тег" Click="AddTag_Click" Width="120" Margin="0,0,10,0"/>
+            <Button Content="Показать теги задачи" Click="ShowTaskTags_Click" Width="160" Margin="0,0,10,0"/>
+        </StackPanel>
+
+        <ListBox x:Name="TagsListBox" Grid.Row="1" Margin="10"/>
     </Grid>
 </Window>

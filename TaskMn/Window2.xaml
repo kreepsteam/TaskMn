@@ -1,0 +1,28 @@
+﻿<Window x:Class="TaskMn.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Task Manager" Height="500" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Панель с кнопками -->
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <Button Content="Показать историю" Click="ShowChangeHistory_Click" Width="150" Margin="0,0,10,0"/>
+        </StackPanel>
+
+        <!-- История изменений -->
+        <ListView x:Name="ChangeHistoryListView" Grid.Row="1" Margin="10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50"/>
+                    <GridViewColumn Header="ID задачи" DisplayMemberBinding="{Binding TaskId}" Width="100"/>
+                    <GridViewColumn Header="Тип изменения" DisplayMemberBinding="{Binding ChangeType}" Width="200"/>
+                    <GridViewColumn Header="Время изменения" DisplayMemberBinding="{Binding ChangeTime}" Width="150"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
