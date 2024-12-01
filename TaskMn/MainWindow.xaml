@@ -1,19 +1,82 @@
 ﻿<Window x:Class="TaskMn.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Task Manager" Height="400" Width="600">
+        Title="Task Manager" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <StackPanel Orientation="Horizontal" Margin="10">
+        <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="0">
             <TextBox x:Name="TagNameTextBox" Width="150" Margin="0,0,10,0"/>
             <Button Content="Добавить тег" Click="AddTag_Click" Width="120" Margin="0,0,10,0"/>
             <Button Content="Показать теги задачи" Click="ShowTaskTags_Click" Width="160" Margin="0,0,10,0"/>
         </StackPanel>
-
-        <ListBox x:Name="TagsListBox" Grid.Row="1" Margin="10"/>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Все задачи">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="AllTasksGrid" AutoGenerateColumns="False" Grid.Row="0" IsReadOnly="True" Margin="5" SelectionChanged="AllTasksGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
+                            <DataGridTextColumn Header="Приоритет" Binding="{Binding Priority}"/>
+                            <DataGridCheckBoxColumn Header="Статус выполнения" Binding="{Binding Status}"/>
+                            <DataGridTextColumn Header="Дата изменения" Binding="{Binding CreatedAt}"/>
+                            <DataGridTextColumn Header="Дата выполнения" Binding="{Binding CompletedAt}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="5" HorizontalAlignment="Center">
+                        <TextBox x:Name="TagFilterTextBox" Width="200" Margin="5"/>
+                        <Button Content="Фильтровать" Width="100" Margin="5" Click="FilterTasksByTag_Click"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="5" HorizontalAlignment="Center">
+                        <Button Content="Добавить" Width="75" Margin="5" Click="AddTask_Click"/>
+                        <Button Content="Редактировать" Width="90" Margin="5" Click="EditTask_Click"/>
+                        <Button Content="Удалить" Width="75" Margin="5" Click="DeleteTask_Click"/>
+                        <Button Content="Экспортировать в JSON" Width="150" Margin="5" Click="ExportTasksToJson_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Высокий приоритет">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="HighPriorityTasksGrid" AutoGenerateColumns="False" Grid.Row="0" IsReadOnly="True" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
+                            <DataGridTextColumn Header="Приоритет" Binding="{Binding Priority}"/>
+                            <DataGridCheckBoxColumn Header="Статус выполнения" Binding="{Binding Status}"/>
+                            <DataGridTextColumn Header="Дата добавления" Binding="{Binding CreatedAt}"/>
+                            <DataGridTextColumn Header="Дата выполнения" Binding="{Binding CompletedAt}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="5" HorizontalAlignment="Center">
+                        <Button Content="Добавить" Width="75" Margin="5" Click="AddTask_Click"/>
+                        <Button Content="Редактировать" Width="90" Margin="5" Click="EditTask_Click"/>
+                        <Button Content="Удалить" Width="75" Margin="5" Click="DeleteTask_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="История изменений">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="ChangeHistoryGrid" AutoGenerateColumns="False" Grid.Row="0" IsReadOnly="True" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Тип изменения" Binding="{Binding ChangeType}"/>
+                            <DataGridTextColumn Header="Время изменения" Binding="{Binding ChangeTime}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

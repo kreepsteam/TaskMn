@@ -1,0 +1,16 @@
+﻿<Window x:Class="TaskMn.AddTagWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaskMn"
+        mc:Ignorable="d"
+        Title="AddTagWindow" Height="450" Width="800">
+    <Grid Margin="10">
+        <StackPanel>
+            <TextBox Name="TagTextBox" Width="200" Margin="5"  />
+            <Button Content="Сохранить тег" Width="100" Margin="5" Click="SaveTagButton_Click"/>
+            <Button Content="Отмена" Width="100" Margin="5" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
